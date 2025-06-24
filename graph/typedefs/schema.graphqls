@@ -1,0 +1,135 @@
+type Query {
+  getWeatherData(city: String!, date: String): WeatherResponse
+}
+
+type WeatherResponse {
+  queryCost: Int
+  latitude: Float
+  longitude: Float
+  resolvedAddress: String
+  address: String
+  timezone: String
+  tzoffset: Float
+  description: String
+  days: [Day]
+  currentConditions: CurrentConditions
+  alerts: [String]
+  stations: [Station]
+  isProcessed: Boolean
+}
+
+type Day {
+  datetime: String
+  datetimeEpoch: Int
+  tempmax: Float
+  tempmin: Float
+  temp: Float
+  feelslikemax: Float
+  feelslikemin: Float
+  feelslike: Float
+  dew: Float
+  humidity: Float
+  precip: Float
+  precipprob: Float
+  precipcover: Float
+  preciptype: [String]
+  snow: Float
+  snowdepth: Float
+  windgust: Float
+  windspeed: Float
+  winddir: Float
+  pressure: Float
+  cloudcover: Float
+  visibility: Float
+  solarradiation: Float
+  solarenergy: Float
+  uvindex: Int
+  severerisk: Int
+  sunrise: String
+  sunriseEpoch: Int
+  sunset: String
+  sunsetEpoch: Int
+  moonphase: Float
+  conditions: String
+  description: String
+  icon: String
+  stations: [String]
+  source: String
+  hours: [Hour]
+  precipsum: Float
+  precipsumnormal: Float
+  snowsum: Float
+  datetimeInstance: String
+}
+
+type Hour {
+  datetime: String
+  datetimeEpoch: Int
+  temp: Float
+  feelslike: Float
+  humidity: Float
+  dew: Float
+  precip: Float
+  precipprob: Float
+  snow: Float
+  snowdepth: Float
+  preciptype: [String]
+  windgust: Float
+  windspeed: Float
+  winddir: Float
+  pressure: Float
+  visibility: Float
+  cloudcover: Float
+  solarradiation: Float
+  solarenergy: Float
+  uvindex: Int
+  severerisk: Int
+  conditions: String
+  icon: String
+  stations: [String]
+  source: String
+  datetimeInstance: String
+}
+
+type Station {
+  id: String
+  name: String
+  distance: Float
+  latitude: Float
+  longitude: Float
+  useCount: Int
+  quality: Int
+  contribution: Int
+}
+
+type CurrentConditions {
+  datetime: String
+  datetimeEpoch: Int
+  temp: Float
+  feelslike: Float
+  humidity: Float
+  dew: Float
+  precip: Float
+  precipprob: Float
+  snow: Float
+  snowdepth: Float
+  preciptype: [String]
+  windgust: Float
+  windspeed: Float
+  winddir: Float
+  pressure: Float
+  visibility: Float
+  cloudcover: Float
+  solarradiation: Float
+  solarenergy: Float
+  uvindex: Int
+  conditions: String
+  icon: String
+  stations: [String]
+  source: String
+  sunrise: String
+  sunriseEpoch: Int
+  sunset: String
+  sunsetEpoch: Int
+  moonphase: Float
+}
