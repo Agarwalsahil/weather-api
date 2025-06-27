@@ -29,6 +29,8 @@ func (r *queryResolver) GetWeatherData(ctx context.Context, city string, date *s
 		givenDate = *date
 	}
 
+	// rd := rc.GetRedis(ctx)
+
 	url := fmt.Sprintf("%s/%s/%s?unitGroup=%s&key=%s", weatherApiUrl, city, givenDate, unit, apiKey)
 	resp, err := http.Get(url)
 

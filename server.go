@@ -1,11 +1,15 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
 	"weather-api/graph"
+	"weather-api/graph/cache"
+	"weather-api/graph/rc"
 
+	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/extension"
 	"github.com/99designs/gqlgen/graphql/handler/lru"
@@ -17,6 +21,10 @@ import (
 const defaultPort = "8080"
 
 func main() {
+
+	ctx := context.Background()
+	cache.InitRedis(ctx)
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
@@ -33,6 +41,11 @@ func main() {
 	srv.Use(extension.Introspection{})
 	srv.Use(extension.AutomaticPersistedQuery{
 		Cache: lru.New[string](100),
+	})
+
+	srv.AroundOperations(func(ctx context.Context, next graphql.OperationHandler) graphql.ResponseHandler {
+		log.Println("Injecting Redis via AroundOperations")
+		return next(rc.InjectRedis(ctx, cache.Rdb))
 	})
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/weather"))
