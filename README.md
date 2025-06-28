@@ -1,6 +1,6 @@
 # 🌦️ Weather API (GraphQL + Go + Redis)
 
-A GraphQL-based weather API built with Go that fetches real-time and historical weather data from [Visual Crossing](https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/). The API supports querying by city and optional date, caches responses using Redis, and applies rate limiting using API keys to prevent abuse.
+A GraphQL-based weather API built with Go that fetches real-time and historical weather data from [Visual Crossing](https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/). The API supports querying by city and optional date, caches responses using Redis, and applies rate limiting using API keys to prevent abuse. This is my project following https://roadmap.sh/projects/weather-api-wrapper-service.
 
 ---
 
