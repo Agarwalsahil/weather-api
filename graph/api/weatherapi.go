@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"weather-api/graph/model"
 )
 
@@ -14,7 +15,11 @@ const (
 )
 
 func GetWeatherFromAPI(city string, givenDate string) (*model.WeatherResponse, error) {
-	apiKey := "TU2C99PGAASQJKVKGWKGX8L7X"
+	apiKey := os.Getenv("WEATHER_API_KEY")
+
+	if apiKey == "" {
+		return nil, fmt.Errorf("WEATHER_API_KEY environment variable not set")
+	}
 
 	url := fmt.Sprintf("%s/%s/%s?unitGroup=%s&key=%s", weatherApiUrl, city, givenDate, unit, apiKey)
 	resp, err := http.Get(url)

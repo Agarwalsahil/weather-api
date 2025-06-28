@@ -7,6 +7,7 @@ import (
 	"os"
 	"weather-api/graph"
 	"weather-api/graph/cache"
+	"weather-api/graph/middleware"
 	"weather-api/graph/rc"
 
 	"github.com/99designs/gqlgen/graphql"
@@ -49,7 +50,7 @@ func main() {
 	})
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/weather"))
-	http.Handle("/weather", srv)
+	http.Handle("/weather", middleware.RateLimiter(cache.Rdb)(srv))
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

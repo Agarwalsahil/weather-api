@@ -3,7 +3,6 @@ package rc
 import (
 	"context"
 	"log"
-	"net/http"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -24,13 +23,4 @@ func GetRedis(ctx context.Context) *redis.Client {
 		return rdb
 	}
 	return nil
-}
-
-func WithRedis(rdb *redis.Client) func(http.Handler) http.Handler {
-    return func(next http.Handler) http.Handler {
-        return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-            ctx := InjectRedis(r.Context(), rdb)
-            next.ServeHTTP(w, r.WithContext(ctx))
-        })
-    }
 }
