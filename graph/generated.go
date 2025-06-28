@@ -155,17 +155,6 @@ type ComplexityRoot struct {
 		GetWeatherData func(childComplexity int, city string, date *string) int
 	}
 
-	Station struct {
-		Contribution func(childComplexity int) int
-		Distance     func(childComplexity int) int
-		ID           func(childComplexity int) int
-		Latitude     func(childComplexity int) int
-		Longitude    func(childComplexity int) int
-		Name         func(childComplexity int) int
-		Quality      func(childComplexity int) int
-		UseCount     func(childComplexity int) int
-	}
-
 	WeatherResponse struct {
 		Address           func(childComplexity int) int
 		Alerts            func(childComplexity int) int
@@ -177,7 +166,6 @@ type ComplexityRoot struct {
 		Longitude         func(childComplexity int) int
 		QueryCost         func(childComplexity int) int
 		ResolvedAddress   func(childComplexity int) int
-		Stations          func(childComplexity int) int
 		Timezone          func(childComplexity int) int
 		Tzoffset          func(childComplexity int) int
 	}
@@ -890,62 +878,6 @@ func (e *executableSchema) Complexity(ctx context.Context, typeName, field strin
 
 		return e.complexity.Query.GetWeatherData(childComplexity, args["city"].(string), args["date"].(*string)), true
 
-	case "Station.contribution":
-		if e.complexity.Station.Contribution == nil {
-			break
-		}
-
-		return e.complexity.Station.Contribution(childComplexity), true
-
-	case "Station.distance":
-		if e.complexity.Station.Distance == nil {
-			break
-		}
-
-		return e.complexity.Station.Distance(childComplexity), true
-
-	case "Station.id":
-		if e.complexity.Station.ID == nil {
-			break
-		}
-
-		return e.complexity.Station.ID(childComplexity), true
-
-	case "Station.latitude":
-		if e.complexity.Station.Latitude == nil {
-			break
-		}
-
-		return e.complexity.Station.Latitude(childComplexity), true
-
-	case "Station.longitude":
-		if e.complexity.Station.Longitude == nil {
-			break
-		}
-
-		return e.complexity.Station.Longitude(childComplexity), true
-
-	case "Station.name":
-		if e.complexity.Station.Name == nil {
-			break
-		}
-
-		return e.complexity.Station.Name(childComplexity), true
-
-	case "Station.quality":
-		if e.complexity.Station.Quality == nil {
-			break
-		}
-
-		return e.complexity.Station.Quality(childComplexity), true
-
-	case "Station.useCount":
-		if e.complexity.Station.UseCount == nil {
-			break
-		}
-
-		return e.complexity.Station.UseCount(childComplexity), true
-
 	case "WeatherResponse.address":
 		if e.complexity.WeatherResponse.Address == nil {
 			break
@@ -1015,13 +947,6 @@ func (e *executableSchema) Complexity(ctx context.Context, typeName, field strin
 		}
 
 		return e.complexity.WeatherResponse.ResolvedAddress(childComplexity), true
-
-	case "WeatherResponse.stations":
-		if e.complexity.WeatherResponse.Stations == nil {
-			break
-		}
-
-		return e.complexity.WeatherResponse.Stations(childComplexity), true
 
 	case "WeatherResponse.timezone":
 		if e.complexity.WeatherResponse.Timezone == nil {
@@ -2111,9 +2036,9 @@ func (ec *executionContext) _CurrentConditions_uvindex(ctx context.Context, fiel
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CurrentConditions_uvindex(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2123,7 +2048,7 @@ func (ec *executionContext) fieldContext_CurrentConditions_uvindex(_ context.Con
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -2357,9 +2282,9 @@ func (ec *executionContext) _CurrentConditions_sunriseEpoch(ctx context.Context,
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CurrentConditions_sunriseEpoch(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2369,7 +2294,7 @@ func (ec *executionContext) fieldContext_CurrentConditions_sunriseEpoch(_ contex
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -2439,9 +2364,9 @@ func (ec *executionContext) _CurrentConditions_sunsetEpoch(ctx context.Context, 
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_CurrentConditions_sunsetEpoch(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2451,7 +2376,7 @@ func (ec *executionContext) fieldContext_CurrentConditions_sunsetEpoch(_ context
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -2562,9 +2487,9 @@ func (ec *executionContext) _Day_datetimeEpoch(ctx context.Context, field graphq
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Day_datetimeEpoch(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2574,7 +2499,7 @@ func (ec *executionContext) fieldContext_Day_datetimeEpoch(_ context.Context, fi
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -3505,9 +3430,9 @@ func (ec *executionContext) _Day_uvindex(ctx context.Context, field graphql.Coll
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Day_uvindex(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -3517,7 +3442,7 @@ func (ec *executionContext) fieldContext_Day_uvindex(_ context.Context, field gr
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -3546,9 +3471,9 @@ func (ec *executionContext) _Day_severerisk(ctx context.Context, field graphql.C
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Day_severerisk(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -3558,7 +3483,7 @@ func (ec *executionContext) fieldContext_Day_severerisk(_ context.Context, field
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -3628,9 +3553,9 @@ func (ec *executionContext) _Day_sunriseEpoch(ctx context.Context, field graphql
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Day_sunriseEpoch(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -3640,7 +3565,7 @@ func (ec *executionContext) fieldContext_Day_sunriseEpoch(_ context.Context, fie
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -3710,9 +3635,9 @@ func (ec *executionContext) _Day_sunsetEpoch(ctx context.Context, field graphql.
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Day_sunsetEpoch(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -3722,7 +3647,7 @@ func (ec *executionContext) fieldContext_Day_sunsetEpoch(_ context.Context, fiel
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -5035,9 +4960,9 @@ func (ec *executionContext) _Hour_uvindex(ctx context.Context, field graphql.Col
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Hour_uvindex(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -5047,7 +4972,7 @@ func (ec *executionContext) fieldContext_Hour_uvindex(_ context.Context, field g
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -5076,9 +5001,9 @@ func (ec *executionContext) _Hour_severerisk(ctx context.Context, field graphql.
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*int32)
+	res := resTmp.(*float64)
 	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Hour_severerisk(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -5088,7 +5013,7 @@ func (ec *executionContext) fieldContext_Hour_severerisk(_ context.Context, fiel
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
+			return nil, errors.New("field of type Float does not have child fields")
 		},
 	}
 	return fc, nil
@@ -5357,8 +5282,6 @@ func (ec *executionContext) fieldContext_Query_getWeatherData(ctx context.Contex
 				return ec.fieldContext_WeatherResponse_currentConditions(ctx, field)
 			case "alerts":
 				return ec.fieldContext_WeatherResponse_alerts(ctx, field)
-			case "stations":
-				return ec.fieldContext_WeatherResponse_stations(ctx, field)
 			case "isProcessed":
 				return ec.fieldContext_WeatherResponse_isProcessed(ctx, field)
 			}
@@ -5505,334 +5428,6 @@ func (ec *executionContext) fieldContext_Query___schema(_ context.Context, field
 				return ec.fieldContext___Schema_directives(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type __Schema", field.Name)
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_id(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_id(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.ID, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*string)
-	fc.Result = res
-	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_id(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_name(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_name(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Name, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*string)
-	fc.Result = res
-	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_name(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_distance(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_distance(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Distance, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*float64)
-	fc.Result = res
-	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_distance(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Float does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_latitude(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_latitude(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Latitude, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*float64)
-	fc.Result = res
-	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_latitude(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Float does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_longitude(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_longitude(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Longitude, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*float64)
-	fc.Result = res
-	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_longitude(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Float does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_useCount(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_useCount(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.UseCount, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*int32)
-	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_useCount(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_quality(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_quality(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Quality, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*int32)
-	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_quality(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Station_contribution(ctx context.Context, field graphql.CollectedField, obj *model.Station) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Station_contribution(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Contribution, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*int32)
-	fc.Result = res
-	return ec.marshalOInt2ᚖint32(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Station_contribution(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Station",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
 		},
 	}
 	return fc, nil
@@ -6428,65 +6023,6 @@ func (ec *executionContext) fieldContext_WeatherResponse_alerts(_ context.Contex
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _WeatherResponse_stations(ctx context.Context, field graphql.CollectedField, obj *model.WeatherResponse) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_WeatherResponse_stations(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Stations, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.([]*model.Station)
-	fc.Result = res
-	return ec.marshalOStation2ᚕᚖweatherᚑapiᚋgraphᚋmodelᚐStation(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_WeatherResponse_stations(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "WeatherResponse",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Station_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Station_name(ctx, field)
-			case "distance":
-				return ec.fieldContext_Station_distance(ctx, field)
-			case "latitude":
-				return ec.fieldContext_Station_latitude(ctx, field)
-			case "longitude":
-				return ec.fieldContext_Station_longitude(ctx, field)
-			case "useCount":
-				return ec.fieldContext_Station_useCount(ctx, field)
-			case "quality":
-				return ec.fieldContext_Station_quality(ctx, field)
-			case "contribution":
-				return ec.fieldContext_Station_contribution(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Station", field.Name)
 		},
 	}
 	return fc, nil
@@ -8855,56 +8391,6 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 	return out
 }
 
-var stationImplementors = []string{"Station"}
-
-func (ec *executionContext) _Station(ctx context.Context, sel ast.SelectionSet, obj *model.Station) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, stationImplementors)
-
-	out := graphql.NewFieldSet(fields)
-	deferred := make(map[string]*graphql.FieldSet)
-	for i, field := range fields {
-		switch field.Name {
-		case "__typename":
-			out.Values[i] = graphql.MarshalString("Station")
-		case "id":
-			out.Values[i] = ec._Station_id(ctx, field, obj)
-		case "name":
-			out.Values[i] = ec._Station_name(ctx, field, obj)
-		case "distance":
-			out.Values[i] = ec._Station_distance(ctx, field, obj)
-		case "latitude":
-			out.Values[i] = ec._Station_latitude(ctx, field, obj)
-		case "longitude":
-			out.Values[i] = ec._Station_longitude(ctx, field, obj)
-		case "useCount":
-			out.Values[i] = ec._Station_useCount(ctx, field, obj)
-		case "quality":
-			out.Values[i] = ec._Station_quality(ctx, field, obj)
-		case "contribution":
-			out.Values[i] = ec._Station_contribution(ctx, field, obj)
-		default:
-			panic("unknown field " + strconv.Quote(field.Name))
-		}
-	}
-	out.Dispatch(ctx)
-	if out.Invalids > 0 {
-		return graphql.Null
-	}
-
-	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
-
-	for label, dfs := range deferred {
-		ec.processDeferredGroup(graphql.DeferredGroup{
-			Label:    label,
-			Path:     graphql.GetPath(ctx),
-			FieldSet: dfs,
-			Context:  ctx,
-		})
-	}
-
-	return out
-}
-
 var weatherResponseImplementors = []string{"WeatherResponse"}
 
 func (ec *executionContext) _WeatherResponse(ctx context.Context, sel ast.SelectionSet, obj *model.WeatherResponse) graphql.Marshaler {
@@ -8938,8 +8424,6 @@ func (ec *executionContext) _WeatherResponse(ctx context.Context, sel ast.Select
 			out.Values[i] = ec._WeatherResponse_currentConditions(ctx, field, obj)
 		case "alerts":
 			out.Values[i] = ec._WeatherResponse_alerts(ctx, field, obj)
-		case "stations":
-			out.Values[i] = ec._WeatherResponse_stations(ctx, field, obj)
 		case "isProcessed":
 			out.Values[i] = ec._WeatherResponse_isProcessed(ctx, field, obj)
 		default:
@@ -9751,54 +9235,6 @@ func (ec *executionContext) marshalOInt2ᚖint32(ctx context.Context, sel ast.Se
 	_ = ctx
 	res := graphql.MarshalInt32(*v)
 	return res
-}
-
-func (ec *executionContext) marshalOStation2ᚕᚖweatherᚑapiᚋgraphᚋmodelᚐStation(ctx context.Context, sel ast.SelectionSet, v []*model.Station) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	ret := make(graphql.Array, len(v))
-	var wg sync.WaitGroup
-	isLen1 := len(v) == 1
-	if !isLen1 {
-		wg.Add(len(v))
-	}
-	for i := range v {
-		i := i
-		fc := &graphql.FieldContext{
-			Index:  &i,
-			Result: &v[i],
-		}
-		ctx := graphql.WithFieldContext(ctx, fc)
-		f := func(i int) {
-			defer func() {
-				if r := recover(); r != nil {
-					ec.Error(ctx, ec.Recover(ctx, r))
-					ret = nil
-				}
-			}()
-			if !isLen1 {
-				defer wg.Done()
-			}
-			ret[i] = ec.marshalOStation2ᚖweatherᚑapiᚋgraphᚋmodelᚐStation(ctx, sel, v[i])
-		}
-		if isLen1 {
-			f(i)
-		} else {
-			go f(i)
-		}
-
-	}
-	wg.Wait()
-
-	return ret
-}
-
-func (ec *executionContext) marshalOStation2ᚖweatherᚑapiᚋgraphᚋmodelᚐStation(ctx context.Context, sel ast.SelectionSet, v *model.Station) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	return ec._Station(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalOString2ᚕᚖstring(ctx context.Context, v any) ([]*string, error) {

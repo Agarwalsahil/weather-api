@@ -22,21 +22,21 @@ type CurrentConditions struct {
 	Cloudcover     *float64  `json:"cloudcover,omitempty"`
 	Solarradiation *float64  `json:"solarradiation,omitempty"`
 	Solarenergy    *float64  `json:"solarenergy,omitempty"`
-	Uvindex        *int32    `json:"uvindex,omitempty"`
+	Uvindex        *float64  `json:"uvindex,omitempty"`
 	Conditions     *string   `json:"conditions,omitempty"`
 	Icon           *string   `json:"icon,omitempty"`
 	Stations       []*string `json:"stations,omitempty"`
 	Source         *string   `json:"source,omitempty"`
 	Sunrise        *string   `json:"sunrise,omitempty"`
-	SunriseEpoch   *int32    `json:"sunriseEpoch,omitempty"`
+	SunriseEpoch   *float64  `json:"sunriseEpoch,omitempty"`
 	Sunset         *string   `json:"sunset,omitempty"`
-	SunsetEpoch    *int32    `json:"sunsetEpoch,omitempty"`
+	SunsetEpoch    *float64  `json:"sunsetEpoch,omitempty"`
 	Moonphase      *float64  `json:"moonphase,omitempty"`
 }
 
 type Day struct {
 	Datetime         *string   `json:"datetime,omitempty"`
-	DatetimeEpoch    *int32    `json:"datetimeEpoch,omitempty"`
+	DatetimeEpoch    *float64  `json:"datetimeEpoch,omitempty"`
 	Tempmax          *float64  `json:"tempmax,omitempty"`
 	Tempmin          *float64  `json:"tempmin,omitempty"`
 	Temp             *float64  `json:"temp,omitempty"`
@@ -59,12 +59,12 @@ type Day struct {
 	Visibility       *float64  `json:"visibility,omitempty"`
 	Solarradiation   *float64  `json:"solarradiation,omitempty"`
 	Solarenergy      *float64  `json:"solarenergy,omitempty"`
-	Uvindex          *int32    `json:"uvindex,omitempty"`
-	Severerisk       *int32    `json:"severerisk,omitempty"`
+	Uvindex          *float64  `json:"uvindex,omitempty"`
+	Severerisk       *float64  `json:"severerisk,omitempty"`
 	Sunrise          *string   `json:"sunrise,omitempty"`
-	SunriseEpoch     *int32    `json:"sunriseEpoch,omitempty"`
+	SunriseEpoch     *float64  `json:"sunriseEpoch,omitempty"`
 	Sunset           *string   `json:"sunset,omitempty"`
-	SunsetEpoch      *int32    `json:"sunsetEpoch,omitempty"`
+	SunsetEpoch      *float64  `json:"sunsetEpoch,omitempty"`
 	Moonphase        *float64  `json:"moonphase,omitempty"`
 	Conditions       *string   `json:"conditions,omitempty"`
 	Description      *string   `json:"description,omitempty"`
@@ -98,8 +98,8 @@ type Hour struct {
 	Cloudcover       *float64  `json:"cloudcover,omitempty"`
 	Solarradiation   *float64  `json:"solarradiation,omitempty"`
 	Solarenergy      *float64  `json:"solarenergy,omitempty"`
-	Uvindex          *int32    `json:"uvindex,omitempty"`
-	Severerisk       *int32    `json:"severerisk,omitempty"`
+	Uvindex          *float64  `json:"uvindex,omitempty"`
+	Severerisk       *float64  `json:"severerisk,omitempty"`
 	Conditions       *string   `json:"conditions,omitempty"`
 	Icon             *string   `json:"icon,omitempty"`
 	Stations         []*string `json:"stations,omitempty"`
@@ -108,17 +108,6 @@ type Hour struct {
 }
 
 type Query struct {
-}
-
-type Station struct {
-	ID           *string  `json:"id,omitempty"`
-	Name         *string  `json:"name,omitempty"`
-	Distance     *float64 `json:"distance,omitempty"`
-	Latitude     *float64 `json:"latitude,omitempty"`
-	Longitude    *float64 `json:"longitude,omitempty"`
-	UseCount     *int32   `json:"useCount,omitempty"`
-	Quality      *int32   `json:"quality,omitempty"`
-	Contribution *int32   `json:"contribution,omitempty"`
 }
 
 type WeatherResponse struct {
@@ -133,6 +122,5 @@ type WeatherResponse struct {
 	Days              []*Day             `json:"days,omitempty"`
 	CurrentConditions *CurrentConditions `json:"currentConditions,omitempty"`
 	Alerts            []*string          `json:"alerts,omitempty"`
-	Stations          []*Station         `json:"stations,omitempty"`
 	IsProcessed       *bool              `json:"isProcessed,omitempty"`
 }

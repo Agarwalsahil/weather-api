@@ -14,13 +14,12 @@ type WeatherResponse {
   days: [Day]
   currentConditions: CurrentConditions
   alerts: [String]
-  stations: [Station]
   isProcessed: Boolean
 }
 
 type Day {
   datetime: String
-  datetimeEpoch: Int
+  datetimeEpoch: Float
   tempmax: Float
   tempmin: Float
   temp: Float
@@ -43,12 +42,12 @@ type Day {
   visibility: Float
   solarradiation: Float
   solarenergy: Float
-  uvindex: Int
-  severerisk: Int
+  uvindex: Float
+  severerisk: Float
   sunrise: String
-  sunriseEpoch: Int
+  sunriseEpoch: Float
   sunset: String
-  sunsetEpoch: Int
+  sunsetEpoch: Float
   moonphase: Float
   conditions: String
   description: String
@@ -82,24 +81,13 @@ type Hour {
   cloudcover: Float
   solarradiation: Float
   solarenergy: Float
-  uvindex: Int
-  severerisk: Int
+  uvindex: Float
+  severerisk: Float
   conditions: String
   icon: String
   stations: [String]
   source: String
   datetimeInstance: String
-}
-
-type Station {
-  id: String
-  name: String
-  distance: Float
-  latitude: Float
-  longitude: Float
-  useCount: Int
-  quality: Int
-  contribution: Int
 }
 
 type CurrentConditions {
@@ -122,14 +110,14 @@ type CurrentConditions {
   cloudcover: Float
   solarradiation: Float
   solarenergy: Float
-  uvindex: Int
+  uvindex: Float
   conditions: String
   icon: String
   stations: [String]
   source: String
   sunrise: String
-  sunriseEpoch: Int
+  sunriseEpoch: Float
   sunset: String
-  sunsetEpoch: Int
+  sunsetEpoch: Float
   moonphase: Float
 }
